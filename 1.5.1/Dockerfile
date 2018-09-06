@@ -1,7 +1,7 @@
 FROM alpine:3.7
 
 ARG VERSION=1.5.1
-ARG WS_VERSION=3.0.0
+ARG WS_VERSION=2.4.2
 
 RUN set -ex \
     # Add build dependencies, remove after build
