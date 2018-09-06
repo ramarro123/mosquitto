@@ -1,14 +1,13 @@
 FROM alpine:edge
-MAINTAINER David Audet <david.audet@ca.com>
+LABEL Maintainer="Tim de Pater <code@trafex.nl>" \
+      Description="Lightweight Mosquitto MQTT server based on Alpine Linux."
 
-LABEL Description="Eclipse Mosquitto MQTT Broker"
+# Install packages
+RUN apk --no-cache add mosquitto mosquitto-clients
 
-RUN apk --no-cache add mosquitto=1.5.1-r0 && \
-    mkdir -p /mosquitto/config /mosquitto/data /mosquitto/log && \
-    cp /etc/mosquitto/mosquitto.conf /mosquitto/config && \
-    chown -R mosquitto:mosquitto /mosquitto
+# Expose MQTT port
+EXPOSE 1883
 
-COPY docker-entrypoint.sh /
-ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["/usr/sbin/mosquitto", "-c", "/mosquitto/config/mosquitto.conf"]
+ENV PATH /usr/sbin:$PATH
 
+ENTRYPOINT ["/usr/sbin/mosquitto"]
