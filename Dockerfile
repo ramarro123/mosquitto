@@ -10,4 +10,11 @@ EXPOSE 1883
 
 ENV PATH /usr/sbin:$PATH
 
-ENTRYPOINT ["/usr/sbin/mosquitto"]
+COPY docker-entrypoint.sh /
+
+RUN chmod 777 /docker-entrypoint.sh
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
+
+CMD ["/usr/sbin/mosquitto", "-c", "/mosquitto/config/mosquitto.conf"]
+
