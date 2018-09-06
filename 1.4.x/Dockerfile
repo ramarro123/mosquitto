@@ -10,7 +10,9 @@ EXPOSE 9999
 ENV PATH /usr/sbin:$PATH
 
 COPY docker-entrypoint.sh /
+COPY mosquitto.conf /mosquitto/config/mosquitto.conf
 
+RUN chmod 777 /docker-entrypoint.sh
 RUN chmod 777 /docker-entrypoint.sh
 
 ENTRYPOINT ["/docker-entrypoint.sh"]

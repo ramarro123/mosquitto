@@ -72,8 +72,10 @@ EXPOSE 1883
 EXPOSE 9999
 
 COPY docker-entrypoint.sh /
+COPY mosquitto.conf /mosquitto/config/mosquitto.conf
 
 RUN chmod 777 /docker-entrypoint.sh
+RUN chmod 777 /mosquitto/config/mosquitto.conf
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
